@@ -3,12 +3,5 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "n8n start"
 restartPolicyType = "always"
 restartPolicyMaxRetries = 10
-healthcheckPath = "/healthz"
-healthcheckTimeout = 30
-
-[[deploy.environmentVariables]]
-# All sensitive keys are set via Railway dashboard, not here
-# This file only sets non-secret config
