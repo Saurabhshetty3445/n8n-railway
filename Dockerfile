@@ -1,9 +1,10 @@
 FROM python:3.11-slim
 
-# System deps for Playwright Chromium
 RUN apt-get update && apt-get install -y \
     wget curl ca-certificates \
     fonts-liberation \
+    fonts-unifont \
+    fonts-dejavu \
     libatk-bridge2.0-0 \
     libatk1.0-0 \
     libcups2 \
@@ -16,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     libxrandr2 \
     libxshmfence1 \
     libgbm1 \
-    libasound2t64 \
+    libasound2 \
     libxfixes3 \
     libxext6 \
     libx11-6 \
@@ -31,9 +32,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Playwright Chromium browser only (smaller than full install)
+# Only install browser (NO deps)
 RUN playwright install chromium
-RUN playwright install-deps chromium
 
 COPY scraper.py .
 
